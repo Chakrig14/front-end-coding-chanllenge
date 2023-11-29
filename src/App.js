@@ -1,11 +1,11 @@
 
 import './App.css';
-import TrafficLight from './TrafficLight';
+import DigitalClock from './components/DigitalClock';
 
 function App() {
   return (
     <div className="App">
-      <TrafficLight />
+      <DigitalClock />
     </div>
   );
 }
