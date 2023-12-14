@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 * {
   box-sizing: border-box;
   margin: 0px;
@@ -79,4 +83,14 @@ body {
   font-weight: 800;
   font-size: 1rem;
   padding: 4px;
+}
+
+.read-hover:hover {
+  cursor: pointer;
+  color: rgb(4, 97, 57);
+}
+
+.read-less:hover {
+  cursor: pointer;
+  color: rgb(243, 65, 95);
 }

@@ -1,32 +1,26 @@
-
 import './App.css';
-import TabActive from './components/TabActive';
+import Home from './components/Home';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import SingleMovie from './components/SingleMovie';
 
-function App() {
-  let tabItem = {
-    items: [
+const router = createBrowserRouter([
+  {
+    path: "/",
+    children: [
       {
-        value: "html",
-        label: "HTML",
-        desc: "The HyperText Markup Language or HTML is the standard markup language for documents designed to be displayed in a web browser."
+        index: true,
+        element: <Home />
       },
       {
-        value: "css",
-        label: "CSS",
-        desc: "Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language such as HTML or XML."
-      },
-      {
-        value: "js",
-        label: "JS",
-        desc: "JavaScript, often abbreviated as JS, is a programming language that is one of the core technologies of the World Wide Web, alongside HTML and CSS."
+        path: "/movies/:movieid",
+        element: <SingleMovie />
       }
     ]
   }
-  return (
-    <div className="App">
-      <TabActive items={tabItem} />
-    </div>
-  );
+])
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;
