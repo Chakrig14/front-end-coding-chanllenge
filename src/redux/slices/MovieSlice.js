@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios";
+import moviesData from "../../data/db";
 const dataCache = () => {
     const cachedData = localStorage.getItem('moviedData');
-    return cachedData ? JSON.parse(cachedData) : null;
+    return cachedData ? JSON.parse(cachedData) : localStorage.setItem('moviedData', JSON.stringify(moviesData));
 };
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
     try {

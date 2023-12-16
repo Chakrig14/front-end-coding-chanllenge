@@ -17,7 +17,15 @@ const SingleMovie = () => {
             {status === 'loading' ? <div>Loading...</div> : status === 'error' ? <div>{error}</div> :
                 <div>
                     {singleMovie && singleMovie.map((movie, index) => (
-                        <div key={index}><p>{movie.title}</p></div>
+                        <div key={index}>
+                            <p>{movie.title}</p>
+                            <img src={movie.big_image} alt={movie.title} />
+                            <p>{movie.description}</p>
+                            <p>{movie.rank}</p>
+                            <p>{movie.year}</p>
+                            <img src={movie.thumbnail} alt={movie.title} />
+                            {movie.genre.map((item, index) => <div key={index}>{item}</div>)}
+                        </div>
                     ))}
                 </div>}
         </>
