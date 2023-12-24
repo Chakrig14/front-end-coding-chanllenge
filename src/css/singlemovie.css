@@ -1,0 +1,35 @@
+.movie-heading {
+    font-family: "Rubik Maps";
+}
+
+.movie-description {
+    font-family: "Poppins";
+}
+
+.movie-main {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.movie-details {
+    max-width: 800px;
+}
+
+.movie-img {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.breadcrumb {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.icon {
+    font-size: 1rem;
+}

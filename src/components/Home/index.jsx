@@ -30,7 +30,7 @@ export default function Home() {
     return (
         <>
             {status === "loading" ? <div>Loading....</div> : status === "error" ? <div>{error}</div> :
-                <>
+                <div className="bg-slate-950 text-white p-4">
                     <h1 className="text-center text-3xl capitalize">Top 100 Movies</h1>
                     <div className="grid gap-4 grid-cols-4 grid-rows-3 p-8">
                         {movies && movies.slice(page * 10 - 10, page * 10).map((mov, index) => (
@@ -41,12 +41,12 @@ export default function Home() {
                         <button onClick={() => pageSelected(page - 1)}><SkipPrevious /></button>
                         {movies && [...Array(movies.length / 10)].map((_, index) => {
                             return (
-                                <button onClick={() => pageSelected(index + 1)} key={index} className={`mx-3.5 px-3.5 hover:bg-sky-700 hover:text-white ${page === index + 1 ? "bg-slate-900 rounded text-white" : page}`}>{index + 1}</button>
+                                <button onClick={() => pageSelected(index + 1)} key={index} className={`mx-3.5 px-3.5 hover:bg-sky-700 hover:text-white ${page === index + 1 ? "bg-slate-500 rounded text-white" : page}`}>{index + 1}</button>
                             )
                         })}
                         <button onClick={() => pageSelected(page + 1)}><SkipNext /></button>
                     </div>
-                </>
+                </div>
             }
         </>
     )

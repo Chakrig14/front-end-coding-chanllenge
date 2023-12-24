@@ -27,7 +27,7 @@ export const fetchSingleMovie = createAsyncThunk('movies/fetchSingleMovie', asyn
         const localStorageData = dataCache();
         const selectedMovie = localStorageData.filter((item) => item.id === id);
         console.log(selectedMovie);
-        return selectedMovie;
+        return selectedMovie[0];
     }
     catch (e) {
         console.log("Error fetching movie: " + e);
