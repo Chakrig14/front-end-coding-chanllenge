@@ -5,6 +5,11 @@ const dataCache = () => {
     const cachedData = localStorage.getItem('moviedData');
     return cachedData ? JSON.parse(cachedData) : localStorage.setItem('moviedData', JSON.stringify(moviesData));
 };
+
+const watchListLocalStorage = () => {
+    const getWatchList = localStorage.getItem('watchList');
+    return getWatchList ? JSON.parse(getWatchList) : [];
+}
 export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
     try {
         const cachedData = dataCache();
@@ -25,9 +30,31 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
 export const fetchSingleMovie = createAsyncThunk('movies/fetchSingleMovie', async (id) => {
     try {
         const localStorageData = dataCache();
-        const selectedMovie = localStorageData.filter((item) => item.id === id);
-        console.log(selectedMovie);
-        return selectedMovie[0];
+        const getlocalWatchList = watchListLocalStorage();
+        const selectedMovie = localStorageData.find((item) => item.id === id);
+        const movieCheck = getlocalWatchList.some((item) => item.id === id);
+        const result = { ...selectedMovie, movieCheck }
+        return result;
+    }
+    catch (e) {
+        console.log("Error fetching movie: " + e);
+        throw e;
+    }
+})
+
+export const fetchWatchList = createAsyncThunk('movies/fetchWatchList', async (movie) => {
+    try {
+        const watchListData = watchListLocalStorage();
+        let movieCheck = watchListData.filter((item) => item.id === movie.id);
+        if (movieCheck.length > 0) {
+            console.log("Movie already exists");
+            return true;
+        }
+        else {
+            let newValue = [...watchListData, movie];
+            localStorage.setItem('watchList', JSON.stringify(newValue));
+            return false;
+        }
     }
     catch (e) {
         console.log("Error fetching movie: " + e);
@@ -38,6 +65,7 @@ export const fetchSingleMovie = createAsyncThunk('movies/fetchSingleMovie', asyn
 const initialState = {
     movies: [],
     singleMovie: [],
+    watchList: [],
     status: "",
     error: null
 }

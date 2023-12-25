@@ -1,7 +1,8 @@
-import { Add } from "@mui/icons-material";
+import { BookmarkAdd } from "@mui/icons-material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import "../../css/movies.css"
 
 export default function Movies({ movie }) {
     let [hideDesc, setHideDesc] = useState(true);
@@ -13,8 +14,8 @@ export default function Movies({ movie }) {
     return (
         <>
             <Link to={`/movies/${movie.id}`}>
-                <Add className="watchlist" />
                 <div className="min-h-500 hover:shadow-lg flex flex-col justify-center items-center p-3">
+                    <BookmarkAdd className="book-mark self-start" />
                     <p className="text-lg font-semibold font-sans">{movie.title}</p>
                     {/* {
                     hideDesc ? <p>`${movie.description.slice(0, 30)}<span className="text-emerald-500 read-hover" onClick={() => toggleDescription()}> ...Read More</span></p> :

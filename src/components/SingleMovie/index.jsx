@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchSingleMovie } from "../../redux/slices/MovieSlice";
+import { fetchSingleMovie, fetchWatchList } from "../../redux/slices/MovieSlice";
 import "../../css/singlemovie.css";
 import { ArrowForwardIosRounded } from "@mui/icons-material";
 
@@ -11,6 +11,10 @@ const SingleMovie = () => {
     const singleMovie = useSelector((state) => state.MovieSlice.singleMovie);
     const status = useSelector((state) => state.MovieSlice.status);
     const error = useSelector((state) => state.MovieSlice.error);
+    function addtToWatchList(item) {
+        dispatch(fetchWatchList(item));
+        dispatch(fetchSingleMovie(movieid));
+    }
     useEffect(() => {
         dispatch(fetchSingleMovie(movieid))
     }, [movieid, dispatch])
@@ -37,9 +41,10 @@ const SingleMovie = () => {
                             <label className="text-xl text-slate-500 font-semibold">Release Year</label>
                             <p className="movie-description text-l mb-4">{singleMovie.year}</p>
                             <label className="text-xl text-slate-500 font-semibold">Genre</label>
-                            <div className="flex">
+                            <div className="flex mb-4">
                                 {singleMovie.genre && singleMovie.genre.map((item, index) => <p className="movie-description text-l mr-10 border border-white-500 rounded p-1" key={index}>{item}</p>)}
                             </div>
+                            <button disabled={singleMovie.movieCheck} className="watchlist-button border border-white-500 rounded p-2" onClick={() => addtToWatchList(singleMovie)}>{singleMovie.movieCheck ? "✅Added to Watchlist" : "➕Add to Watchlist"}</button>
                         </div>
                     </div>
                 </div>}

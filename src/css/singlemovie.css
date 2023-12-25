@@ -33,3 +33,13 @@
 .icon {
     font-size: 1rem;
 }
+
+.watchlist-button {
+    font-family: "Poppins";
+}
+
+.watchlist-button:hover {
+    background-color: #fff;
+    color: black;
+    transition: background-color ease 0.2s;
+}

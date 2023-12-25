@@ -1,3 +1,8 @@
-.watchlist {
-    position: absolute;
+.book-mark {
+    font-size: 40px;
+}
+
+.book-mark:hover {
+    cursor: pointer;
+    color: #fff;
 }
