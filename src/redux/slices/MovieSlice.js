@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios";
 import moviesData from "../../data/db";
+
 const dataCache = () => {
     const cachedData = localStorage.getItem('moviedData');
     return cachedData ? JSON.parse(cachedData) : localStorage.setItem('moviedData', JSON.stringify(moviesData));
@@ -42,22 +43,45 @@ export const fetchSingleMovie = createAsyncThunk('movies/fetchSingleMovie', asyn
     }
 })
 
-export const fetchWatchList = createAsyncThunk('movies/fetchWatchList', async (movie) => {
+export const addWatchList = createAsyncThunk('movies/fetchWatchList', async (movie) => {
     try {
         const watchListData = watchListLocalStorage();
         let movieCheck = watchListData.filter((item) => item.id === movie.id);
         if (movieCheck.length > 0) {
             console.log("Movie already exists");
-            return true;
         }
         else {
             let newValue = [...watchListData, movie];
             localStorage.setItem('watchList', JSON.stringify(newValue));
-            return false;
+            return newValue;
         }
     }
     catch (e) {
         console.log("Error fetching movie: " + e);
+        throw e;
+    }
+})
+
+export const fetchWatchListLocal = createAsyncThunk('movies/fetchWatchListLocal', async () => {
+    try {
+        const fetchedWatchListData = watchListLocalStorage();
+        return fetchedWatchListData;
+    }
+    catch (e) {
+        console.log("Error fetching watchlist: " + e);
+        throw e;
+    }
+})
+
+export const removeMoviefromList = createAsyncThunk('movies/removeMoviefromList', async (removeMovie) => {
+    try {
+        const watchListData = watchListLocalStorage();
+        const newList = watchListData.filter((item) => item.id !== removeMovie.id);
+        localStorage.setItem('watchList', JSON.stringify(newList));
+        return newList;
+    }
+    catch (e) {
+        console.log("Error remove movie: " + e);
         throw e;
     }
 })
@@ -101,6 +125,25 @@ export const MovieSlice = createSlice({
             .addCase(fetchSingleMovie.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message
+            })
+            .addCase(fetchWatchListLocal.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchWatchListLocal.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.watchList = action.payload;
+            })
+            .addCase(fetchWatchListLocal.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message;
+            })
+            .addCase(removeMoviefromList.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.watchList = action.payload;
+            })
+            .addCase(addWatchList.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.watchList = action.payload;
             })
     }
 })

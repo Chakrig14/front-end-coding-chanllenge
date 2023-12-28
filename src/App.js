@@ -2,6 +2,7 @@ import './App.css';
 import Home from './components/Home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SingleMovie from './components/SingleMovie';
+import WatchLsit from './components/WatchList';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "/movies/:movieid",
         element: <SingleMovie />
+      },
+      {
+        path: "/watchlist",
+        element: <WatchLsit />
       }
     ]
   }

@@ -1,21 +1,29 @@
-import { BookmarkAdd } from "@mui/icons-material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { BookmarkAdd, BookmarkAdded } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import "../../css/movies.css"
+import { useDispatch } from "react-redux";
+import { addWatchList, removeMoviefromList } from "../../redux/slices/MovieSlice";
 
-export default function Movies({ movie }) {
-    let [hideDesc, setHideDesc] = useState(true);
+export default function Movies({ movie, list }) {
     const dispatch = useDispatch();
-    function toggleDescription() {
-        setHideDesc(!hideDesc);
+    function checkBookMark() {
+        let flag = list.find((item) => item.id === movie.id);
+        return flag !== undefined;
+    }
+
+    function removeFromWatchList(movieProp) {
+        dispatch(removeMoviefromList(movieProp));
+    }
+
+    function addToWatchList(movieProp) {
+        dispatch(addWatchList(movieProp));
     }
 
     return (
-        <>
+        <div>
+            {checkBookMark() ? <BookmarkAdded className="book-mark self-start" onClick={() => removeFromWatchList(movie)} /> : <BookmarkAdd className="book-mark self-start" onClick={() => addToWatchList(movie)} />}
             <Link to={`/movies/${movie.id}`}>
                 <div className="min-h-500 hover:shadow-lg flex flex-col justify-center items-center p-3">
-                    <BookmarkAdd className="book-mark self-start" />
                     <p className="text-lg font-semibold font-sans">{movie.title}</p>
                     {/* {
                     hideDesc ? <p>`${movie.description.slice(0, 30)}<span className="text-emerald-500 read-hover" onClick={() => toggleDescription()}> ...Read More</span></p> :
@@ -26,6 +34,6 @@ export default function Movies({ movie }) {
                     <img src={movie.image} alt={movie.title} className="rounded w-3/4" />
                 </div>
             </Link>
-        </>
+        </div>
     )
 } 

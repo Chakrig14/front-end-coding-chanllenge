@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { fetchSingleMovie, fetchWatchList } from "../../redux/slices/MovieSlice";
+import { addWatchList, fetchSingleMovie } from "../../redux/slices/MovieSlice";
 import "../../css/singlemovie.css";
 import { ArrowForwardIosRounded } from "@mui/icons-material";
 
@@ -11,8 +11,9 @@ const SingleMovie = () => {
     const singleMovie = useSelector((state) => state.MovieSlice.singleMovie);
     const status = useSelector((state) => state.MovieSlice.status);
     const error = useSelector((state) => state.MovieSlice.error);
+
     function addtToWatchList(item) {
-        dispatch(fetchWatchList(item));
+        dispatch(addWatchList(item));
         dispatch(fetchSingleMovie(movieid));
     }
     useEffect(() => {
