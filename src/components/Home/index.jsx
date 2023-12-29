@@ -71,9 +71,9 @@ export default function Home() {
                         <input className="search-box text-black text-sm p-1 rounded border-none" value={inputSearch} type="text" placeholder="Enter a movie to search" onChange={(e) => { setInputSearch(e.target.value); handleSearchInput(e) }} />
                         {searchList.length >= 1 && <CancelOutlined className="clear-search icon" onClick={() => { dispatch(resetSearchList()); setInputSearch("") }} />}
                         {searchList.length >= 1 && <div className="absolute bg-white-500 flex flex-col search-result">
-                            {searchList && searchList.map((item) => <><hr className=""></hr><Link to={`movies/${item.id}`} key={item.id}>{item.title}</Link></>)}
+                            {searchList && searchList.map((item) => <div key={item.id}><hr className=""></hr><Link to={`movies/${item.id}`}>{item.title}</Link></div>)}
                         </div>}
-                        <Link to="/watchlist" className="watchlist-icon self-end"><span><AddBox /></span>Watchlist</Link>
+                        <Link to="/watchlist" className="watchlist-icon self-center"><span><AddBox /></span>Watchlist</Link>
                     </div>
                     <div className="grid gap-3 grid-cols-1 grid-rows-1 p-3 sm:gap-4 sm:grid-cols-4 sm:grid-rows-3 sm:p-8">
                         {movies && movies.slice(page * 10 - 10, page * 10).map((mov, index) => (
