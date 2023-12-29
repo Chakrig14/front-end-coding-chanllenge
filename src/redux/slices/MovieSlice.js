@@ -15,13 +15,12 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
     try {
         const cachedData = dataCache();
         if (cachedData) {
-            console.log(cachedData);
             return cachedData;
         }
-        const movies = await axiosInstance.get("https://imdb-top-100-movies.p.rapidapi.com/")
-        const data = await movies.data;
-        localStorage.setItem('moviedData', JSON.stringify(data));
-        return data;
+        // const movies = await axiosInstance.get("https://imdb-top-100-movies.p.rapidapi.com/")
+        // const data = await movies.data;
+        localStorage.setItem('moviedData', JSON.stringify(moviesData));
+        return moviesData;
     }
     catch (e) {
         console.log("Error fetching movie: " + e);
