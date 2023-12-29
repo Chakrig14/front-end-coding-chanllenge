@@ -28,7 +28,7 @@ const SingleMovie = () => {
                         <ArrowForwardIosRounded className="icon" />
                         <p>{singleMovie.title}</p>
                     </div>
-                    <div className="flex movie-main">
+                    <div className="flex flex-col sm:flex-row movie-main">
                         <div className="movie-details">
                             <img className="movie-img" src={singleMovie.big_image} alt={singleMovie.title} />
                             {/* <img src={singleMovie.thumbnail} alt={singleMovie.title} /> */}

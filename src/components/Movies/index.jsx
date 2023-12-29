@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../../css/movies.css"
 import { useDispatch } from "react-redux";
 import { addWatchList, removeMoviefromList } from "../../redux/slices/MovieSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Movies({ movie, list }) {
     const dispatch = useDispatch();
@@ -13,15 +15,18 @@ export default function Movies({ movie, list }) {
 
     function removeFromWatchList(movieProp) {
         dispatch(removeMoviefromList(movieProp));
+        toast.success(`${movieProp.title} Removed from Watchlist`, { position: toast.POSITION.TOP_RIGHT })
     }
 
     function addToWatchList(movieProp) {
         dispatch(addWatchList(movieProp));
+        toast.success(`${movieProp.title} Added to Watchlist`, { position: toast.POSITION.TOP_RIGHT })
     }
 
     return (
         <div>
             {checkBookMark() ? <BookmarkAdded className="book-mark self-start" onClick={() => removeFromWatchList(movie)} /> : <BookmarkAdd className="book-mark self-start" onClick={() => addToWatchList(movie)} />}
+            <ToastContainer />
             <Link to={`/movies/${movie.id}`}>
                 <div className="min-h-500 hover:shadow-lg flex flex-col justify-center items-center p-3">
                     <p className="text-lg font-semibold font-sans">{movie.title}</p>

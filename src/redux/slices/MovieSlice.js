@@ -86,10 +86,34 @@ export const removeMoviefromList = createAsyncThunk('movies/removeMoviefromList'
     }
 })
 
+export const fetchMovieSearch = createAsyncThunk('movies/fetchMovieSearch', async (searchInput) => {
+    try {
+        const movieData = dataCache();
+        const searchMovie = movieData.filter((item) => item.title.toLowerCase().includes(searchInput.toLowerCase()));
+        return searchMovie;
+    }
+    catch (e) {
+        console.log("Error fetching searched value: " + e);
+        throw e;
+    }
+})
+
+export const resetSearchList = createAsyncThunk('movies/resetSearchList', async () => {
+    try {
+        let newSearchList = [];
+        return newSearchList;
+    }
+    catch (e) {
+        console.log("Error fetching searched value: " + e);
+        throw e;
+    }
+})
+
 const initialState = {
     movies: [],
     singleMovie: [],
     watchList: [],
+    searchList: [],
     status: "",
     error: null
 }
@@ -144,6 +168,14 @@ export const MovieSlice = createSlice({
             .addCase(addWatchList.fulfilled, (state, action) => {
                 state.status = 'succeeded';
                 state.watchList = action.payload;
+            })
+            .addCase(fetchMovieSearch.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.searchList = action.payload;
+            })
+            .addCase(resetSearchList.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+                state.searchList = action.payload;
             })
     }
 })

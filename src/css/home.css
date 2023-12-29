@@ -1,0 +1,44 @@
+.search-box {
+    width: 50%;
+}
+
+.search-result {
+    background-color: white;
+    color: black;
+    top: 13%;
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.clear-search {
+    position: absolute;
+    color: black;
+    right: 40%;
+}
+
+.clear-search:hover {
+    cursor: pointer;
+}
+
+@media screen and (min-width: 640px) {
+    .watchlist-icon {
+        position: absolute;
+        right: 5rem;
+    }
+
+    .search-box {
+        width: 25%;
+    }
+
+    .clear-search {
+        right: 38%;
+    }
+
+    .search-result {
+        top: 12%;
+        width: 25%;
+        padding: 10px;
+        border-radius: 10px;
+    }
+}
