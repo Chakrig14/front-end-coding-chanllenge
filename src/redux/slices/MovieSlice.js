@@ -15,6 +15,7 @@ export const fetchMovies = createAsyncThunk('movies/fetchMovies', async () => {
     try {
         const cachedData = dataCache();
         if (cachedData) {
+            console.log(cachedData);
             return cachedData;
         }
         const movies = await axiosInstance.get("https://imdb-top-100-movies.p.rapidapi.com/")
