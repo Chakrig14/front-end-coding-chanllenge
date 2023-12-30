@@ -5,6 +5,7 @@ import { fetchMovieSearch, fetchMovies, fetchWatchListLocal, resetSearchList } f
 import { AddBox, CancelOutlined, SkipNext, SkipPrevious } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import "../../css/home.css";
+import ReactPaginate from "react-paginate";
 
 export default function Home() {
     const [page, setPage] = useState(1);
@@ -35,16 +36,17 @@ export default function Home() {
         dispatch(fetchWatchListLocal())
     }, [dispatch])
 
-    function pageSelected(pageVal) {
-        if (pageVal < 1) {
-            setPage(movies.length / 10)
-        }
-        else if (pageVal > movies.length / 10) {
-            setPage(1);
-        }
-        else {
-            setPage(pageVal)
-        }
+    function pageSelected(selectedPage) {
+        // if (pageVal < 1) {
+        //     setPage(movies.length / 10)
+        // }
+        // else if (pageVal > movies.length / 10) {
+        //     setPage(1);
+        // }
+        // else {
+        //     setPage(pageVal)
+        // }
+        setPage((selectedPage.selected) + 1);
     }
 
     function debounceSearch(value) {
@@ -75,12 +77,12 @@ export default function Home() {
                         </div>}
                         <Link to="/watchlist" className="watchlist-icon self-center"><span><AddBox /></span>Watchlist</Link>
                     </div>
-                    <div className="grid gap-3 grid-cols-1 grid-rows-1 p-3 sm:gap-4 sm:grid-cols-4 sm:grid-rows-3 sm:p-8">
+                    <div className="grid gap-1 grid-cols-2 grid-rows-1 p-3 sm:gap-4 sm:grid-cols-4 sm:grid-rows-3 sm:p-8">
                         {movies && movies.slice(page * 10 - 10, page * 10).map((mov, index) => (
                             <Movies movie={mov} key={index} list={watchList} />
                         ))}
                     </div>
-                    <div className="flex justify-center items-center">
+                    {/* <div className="flex justify-center items-center">
                         <button onClick={() => pageSelected(page - 1)}><SkipPrevious /></button>
                         {movies && [...Array.from({ length: screenSize })].map((_, index) => {
                             return (
@@ -89,7 +91,19 @@ export default function Home() {
                         })}
                         <p className="bg-slate-500 px-3.5 rounded mx-3 sm:hidden">{page}</p>
                         <button onClick={() => pageSelected(page + 1)}><SkipNext /></button>
-                    </div>
+                    </div> */}
+
+                    <ReactPaginate
+                        previousLabel={<SkipPrevious />}
+                        nextLabel={<SkipNext />}
+                        breakLabel={'...'}
+                        pageCount={movies.length / 10}
+                        marginPagesDisplayed={1}
+                        pageRangeDisplayed={4}
+                        onPageChange={pageSelected}
+                        containerClassName={'pagination'}
+                        activeClassName={'bg-slate-500  rounded mx-3.5 px-3.5'}
+                    />
                 </div>
             }
         </>
