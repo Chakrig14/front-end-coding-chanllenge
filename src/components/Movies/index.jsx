@@ -34,7 +34,7 @@ export default function Movies({ movie, list }) {
                     hideDesc ? <p>`${movie.description.slice(0, 30)}<span className="text-emerald-500 read-hover" onClick={() => toggleDescription()}> ...Read More</span></p> :
                         <p>`${movie.description}<span className="text-pink-700 read-less" onClick={() => toggleDescription()}> ...Read Less</span></p>
                 } */}
-                    <p className="text-base font-medium font-mono">Release Year: <span className="text-sm font-sans">{movie.year}</span></p>
+                    <p className="text-base font-medium font-mono">Release Year: <span className="text-xs align-left sm:text-sm font-sans">{movie.year}</span></p>
                     <p>⭐{movie.rating}/10</p>
                     <img src={movie.image} alt={movie.title} className="rounded w-3/4" />
                 </div>

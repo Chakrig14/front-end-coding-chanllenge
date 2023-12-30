@@ -77,7 +77,7 @@ export default function Home() {
                         </div>}
                         <Link to="/watchlist" className="watchlist-icon self-center"><span><AddBox /></span>Watchlist</Link>
                     </div>
-                    <div className="grid gap-1 grid-cols-2 grid-rows-1 p-3 sm:gap-4 sm:grid-cols-4 sm:grid-rows-3 sm:p-8">
+                    <div className="grid gap-1 grid-cols-1 grid-rows-1 p-3 sm:gap-4 sm:grid-cols-4 sm:grid-rows-3 sm:p-8">
                         {movies && movies.slice(page * 10 - 10, page * 10).map((mov, index) => (
                             <Movies movie={mov} key={index} list={watchList} />
                         ))}
