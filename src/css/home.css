@@ -1,15 +1,12 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 .search-box {
     width: 50%;
     height: 35px;
-}
-
-.search-result {
-    background-color: white;
-    color: black;
-    top: 12%;
-    width: 70%;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .clear-search {
@@ -42,6 +39,56 @@
     color: #fff;
 }
 
+.main-container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.list-value {
+    font-family: "Gabarito";
+    cursor: pointer;
+}
+
+.list-value:hover {
+    background-color: #e8e8e8;
+}
+
+.watchlist-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    overflow: hidden;
+    z-index: 999;
+}
+
+.watchlist-main {
+    box-shadow: 0 4px 6px 2px #cecece80;
+    width: 85%;
+    height: fit-content;
+    right: 0;
+    position: absolute;
+    height: 100%;
+}
+
+.search-result-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    left: 0;
+    background-color: rgba(128, 128, 128, 0.5);
+    display: flex;
+    justify-content: center;
+}
+
+.search-result {
+    background-color: white;
+    color: black;
+    height: fit-content;
+}
 
 @media screen and (min-width: 640px) {
     .watchlist-icon {
@@ -50,7 +97,12 @@
     }
 
     .search-box {
-        width: 25%;
+        width: auto;
+    }
+
+    .input-box {
+        width: 380px;
+        align-self: center;
     }
 
     .clear-search {
@@ -62,5 +114,15 @@
         width: 25%;
         padding: 10px;
         border-radius: 10px;
+    }
+
+    .watchlist-main {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .watchlist-main {
+        width: 25%;
     }
 }

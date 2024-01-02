@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axiosInstance from "../../axios";
 import moviesData from "../../data/db";
-
+import Fuse from "fuse.js";
+const options = {
+    keys: ['title'],
+    threshold: 0.4
+}
 const dataCache = () => {
     const cachedData = localStorage.getItem('moviedData');
     return cachedData ? JSON.parse(cachedData) : localStorage.setItem('moviedData', JSON.stringify(moviesData));
@@ -89,8 +93,10 @@ export const removeMoviefromList = createAsyncThunk('movies/removeMoviefromList'
 export const fetchMovieSearch = createAsyncThunk('movies/fetchMovieSearch', async (searchInput) => {
     try {
         const movieData = dataCache();
-        const searchMovie = movieData.filter((item) => item.title.toLowerCase().includes(searchInput.toLowerCase()));
-        return searchMovie;
+        const fuse = new Fuse(movieData, options);
+        const searchMovie = fuse.search(searchInput);
+        console.log(searchMovie);
+        return searchMovie.slice(0, 10);
     }
     catch (e) {
         console.log("Error fetching searched value: " + e);
