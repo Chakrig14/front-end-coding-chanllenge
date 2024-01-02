@@ -6,7 +6,7 @@ import "../../css/watchlist.css"
 import { ArrowForwardIosRounded, CancelOutlined } from "@mui/icons-material";
 import { ToastContainer, toast } from "react-toastify";
 
-const WatchList = ({ list }) => {
+const WatchList = ({ list, status }) => {
     // const watchList = useSelector((state) => state.MovieSlice.watchList);
     // const status = useSelector((state) => state.MovieSlice.status);
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const WatchList = ({ list }) => {
                 <ToastContainer />
                 <div className="flex justify-between">
                     <h1>Watchlist</h1>
-                    <CancelOutlined />
+                    <CancelOutlined className="close-icon" onClick={status} />
                 </div>
                 <div className="flex flex-col watchlist">
                     {list.map((watch) =>

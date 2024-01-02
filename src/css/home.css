@@ -1,15 +1,12 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
 .search-box {
     width: 50%;
     height: 35px;
-}
-
-.search-result {
-    background-color: white;
-    color: black;
-    top: 12%;
-    width: 70%;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .clear-search {
@@ -49,7 +46,6 @@
 
 .list-value {
     font-family: "Gabarito";
-    padding: 0.2rem;
     cursor: pointer;
 }
 
@@ -60,16 +56,37 @@
 .watchlist-container {
     position: absolute;
     top: 0;
-    display: flex;
-    width: 100vw;
+    left: 0;
+    width: 100%;
     height: 100vh;
     background-color: rgba(128, 128, 128, 0.5);
     overflow: hidden;
+    z-index: 999;
 }
 
 .watchlist-main {
     box-shadow: 0 4px 6px 2px #cecece80;
-    width: 25%;
+    width: 85%;
+    height: fit-content;
+    right: 0;
+    position: absolute;
+    height: 100%;
+}
+
+.search-result-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    left: 0;
+    background-color: rgba(128, 128, 128, 0.5);
+    display: flex;
+    justify-content: center;
+}
+
+.search-result {
+    background-color: white;
+    color: black;
     height: fit-content;
 }
 
@@ -97,5 +114,15 @@
         width: 25%;
         padding: 10px;
         border-radius: 10px;
+    }
+
+    .watchlist-main {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .watchlist-main {
+        width: 25%;
     }
 }
