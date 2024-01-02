@@ -27,18 +27,17 @@ export default function Movies({ movie, list }) {
         <div>
             {checkBookMark() ? <BookmarkAdded className="book-mark self-start" onClick={() => removeFromWatchList(movie)} /> : <BookmarkAdd className="book-mark self-start" onClick={() => addToWatchList(movie)} />}
             <ToastContainer />
-            <Link to={`/movies/${movie.id}`}>
-                <div className="min-h-500 hover:shadow-lg flex flex-col justify-center items-center p-3">
-                    <p className="text-lg font-semibold font-sans">{movie.title}</p>
-                    {/* {
+            <div className="min-h-500 hover:shadow-lg flex flex-col justify-center items-center p-3">
+                <p className="text-lg font-semibold font-sans">{movie.title}</p>
+                {/* {
                     hideDesc ? <p>`${movie.description.slice(0, 30)}<span className="text-emerald-500 read-hover" onClick={() => toggleDescription()}> ...Read More</span></p> :
                         <p>`${movie.description}<span className="text-pink-700 read-less" onClick={() => toggleDescription()}> ...Read Less</span></p>
                 } */}
-                    <p className="text-base font-medium font-mono">Release Year: <span className="text-xs align-left sm:text-sm font-sans">{movie.year}</span></p>
-                    <p>⭐{movie.rating}/10</p>
-                    <img src={movie.image} alt={movie.title} className="rounded w-3/4" />
-                </div>
-            </Link>
+                <p className="text-base font-medium font-mono">Release Year: <span className="text-xs align-left sm:text-sm font-sans">{movie.year}</span></p>
+                <p>⭐{movie.rating}/10</p>
+                <img src={movie.image} alt={movie.title} className="rounded w-3/4" />
+                <Link to={`/movies/${movie.id}`} className="bg-slate-600 px-3 py-1 rounded mt-2 shadow hover:bg-slate-700">View More</Link>
+            </div>
         </div>
     )
 } 

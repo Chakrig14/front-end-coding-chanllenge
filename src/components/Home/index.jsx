@@ -6,10 +6,10 @@ import { AddBox, CancelOutlined, SkipNext, SkipPrevious } from "@mui/icons-mater
 import { Link } from "react-router-dom";
 import "../../css/home.css";
 import ReactPaginate from "react-paginate";
+import WatchLsit from "../WatchList";
 
 export default function Home() {
     const [page, setPage] = useState(1);
-    const [screenSize, setScreenSize] = useState(10);
     const [inputSearch, setInputSearch] = useState("");
     const movies = useSelector((state) => state.MovieSlice.movies);
     const status = useSelector((state) => state.MovieSlice.status);
@@ -17,19 +17,6 @@ export default function Home() {
     const watchList = useSelector((state) => state.MovieSlice.watchList);
     const searchList = useSelector((state) => state.MovieSlice.searchList);
     const dispatch = useDispatch();
-    function handleResize() {
-        const isMobile = window.innerWidth <= 640;
-        const newVisiblePage = isMobile ? 5 : 10;
-        setScreenSize(newVisiblePage);
-    }
-
-    useEffect(() => {
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        }
-    })
 
     useEffect(() => {
         dispatch(fetchMovies())
@@ -48,6 +35,8 @@ export default function Home() {
         // }
         setPage((selectedPage.selected) + 1);
     }
+
+    console.log(searchList);
 
     function debounceSearch(value) {
         dispatch(fetchMovieSearch(value));
@@ -69,15 +58,19 @@ export default function Home() {
             {status === "loading" ? <div>Loading....</div> : status === "error" ? <div>{error}</div> :
                 <div className="bg-slate-950 text-white p-4">
                     <h1 className="text-center text-3xl capitalize">Top 100 Movies</h1>
-                    <div className="flex justify-center items-center">
-                        <input className="search-box text-black text-sm p-1 rounded border-none" value={inputSearch} type="text" placeholder="Enter a movie to search" onChange={(e) => { setInputSearch(e.target.value); handleSearchInput(e) }} />
-                        {searchList.length >= 1 && <CancelOutlined className="clear-search icon" onClick={() => { dispatch(resetSearchList()); setInputSearch("") }} />}
-                        {searchList.length >= 1 && <div className="absolute bg-white-500 flex flex-col search-result">
-                            {searchList && searchList.map((item) => <div key={item.id}><hr className=""></hr><Link to={`movies/${item.id}`}>{item.title}</Link></div>)}
-                        </div>}
-                        <Link to="/watchlist" className="watchlist-icon self-center"><span><AddBox /></span>Watchlist</Link>
+                    <div className="flex justify-center items-center main-container">
+                        <div className="search-box">
+                            <input className="input-box text-black text-sm p-1 rounded border-none" value={inputSearch} type="text" placeholder="Enter a movie to search" onChange={(e) => { setInputSearch(e.target.value); handleSearchInput(e) }} />
+                            {searchList.length >= 1 && <span><CancelOutlined className="clear-search icon" onClick={() => { dispatch(resetSearchList()); setInputSearch("") }} /></span>}
+                            <div>
+                                {searchList.length >= 1 && <div className="absolute bg-white-500 flex flex-col search-result">
+                                    {searchList && searchList.map((search) => <Link to={`movies/${search.item.id}`} key={search.item.id} className="list-value"><hr className=""></hr><p>{search.item.title}</p></Link>)}
+                                </div>}
+                            </div>
+                        </div>
+                        <button className="watchlist-icon self-center" ><span><AddBox /></span>Watchlist</button>
                     </div>
-                    <div className="grid gap-1 grid-cols-1 grid-rows-1 p-3 sm:gap-4 sm:grid-cols-4 sm:grid-rows-3 sm:p-8">
+                    <div className="grid gap-1 grid-cols-1 grid-rows-1 p-3 sm:gap-4 sm:grid-cols-4 sm:grid-rows-3 sm:p-8 main-container">
                         {movies && movies.slice(page * 10 - 10, page * 10).map((mov, index) => (
                             <Movies movie={mov} key={index} list={watchList} />
                         ))}
@@ -92,7 +85,7 @@ export default function Home() {
                         <p className="bg-slate-500 px-3.5 rounded mx-3 sm:hidden">{page}</p>
                         <button onClick={() => pageSelected(page + 1)}><SkipNext /></button>
                     </div> */}
-
+                    <WatchLsit list={watchList} />
                     <ReactPaginate
                         previousLabel={<SkipPrevious />}
                         nextLabel={<SkipNext />}

@@ -42,6 +42,36 @@
     color: #fff;
 }
 
+.main-container {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.list-value {
+    font-family: "Gabarito";
+    padding: 0.2rem;
+    cursor: pointer;
+}
+
+.list-value:hover {
+    background-color: #e8e8e8;
+}
+
+.watchlist-container {
+    position: absolute;
+    top: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    overflow: hidden;
+}
+
+.watchlist-main {
+    box-shadow: 0 4px 6px 2px #cecece80;
+    width: 25%;
+    height: fit-content;
+}
 
 @media screen and (min-width: 640px) {
     .watchlist-icon {
@@ -50,7 +80,12 @@
     }
 
     .search-box {
-        width: 25%;
+        width: auto;
+    }
+
+    .input-box {
+        width: 380px;
+        align-self: center;
     }
 
     .clear-search {

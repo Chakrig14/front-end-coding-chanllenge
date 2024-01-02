@@ -39,6 +39,8 @@ const SingleMovie = () => {
                             <p className="movie-description text-l mb-4">{singleMovie.description}</p>
                             <label className="text-xl text-slate-500 font-semibold">Rank</label>
                             <p className="movie-description text-l mb-4">{singleMovie.rank}</p>
+                            <label className="text-xl text-slate-500 font-semibold">Rank</label>
+                            <p className="movie-description text-l mb-4">⭐{singleMovie.rating}/10</p>
                             <label className="text-xl text-slate-500 font-semibold">Release Year</label>
                             <p className="movie-description text-l mb-4">{singleMovie.year}</p>
                             <label className="text-xl text-slate-500 font-semibold">Genre</label>
