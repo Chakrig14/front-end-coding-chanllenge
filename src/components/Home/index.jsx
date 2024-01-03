@@ -53,7 +53,7 @@ export default function Home() {
         clearTimeout(debounceTimer);
         const inputValue = e.target.value;
         if (inputValue.length >= 3) {
-            debounceTimer = setTimeout(() => { debounceSearch(inputValue); setInputSearchResult(true); }, 1500);
+            debounceTimer = setTimeout(() => { debounceSearch(inputValue); document.body.classList.add("scroll-hidden"); setInputSearchResult(true); }, 1500);
         }
         else if (e.target.value < 1) {
             setInputSearch("");
@@ -64,10 +64,17 @@ export default function Home() {
 
     function changeModalStatus() {
         setWatchListStatus(!watchListStatus);
+        if (watchListStatus === true) {
+            document.body.classList.remove("scroll-hidden");
+        }
+        else {
+            document.body.classList.add("scroll-hidden");
+        }
     }
 
     function handleModalStatus(e) {
         if (e.target.className !== "search-result") {
+            document.body.classList.remove("scroll-hidden");
             setInputSearch("");
             setInputSearchResult(false);
         }
@@ -82,7 +89,7 @@ export default function Home() {
                     <div className="flex justify-center items-center main-container">
                         <div className="search-box">
                             <input className="input-box text-black text-sm p-1 rounded border-none" value={inputSearch} type="text" placeholder="Enter a movie to search" onChange={(e) => { setInputSearch(e.target.value); handleSearchInput(e) }} />
-                            {inputSearchResult && <span><CancelOutlined className="clear-search icon" onClick={() => { dispatch(resetSearchList()); setInputSearch(""); setInputSearchResult(false); }} /></span>}
+                            {inputSearchResult && <span><CancelOutlined className="clear-search icon" onClick={() => { dispatch(resetSearchList()); setInputSearch(""); document.body.classList.remove("scroll-hidden"); setInputSearchResult(false); }} /></span>}
                             {inputSearchResult && <div className="search-result-container" onClick={(e) => handleModalStatus(e)}>
                                 {searchList.length >= 1 && <div className="search-result">
                                     {searchList && searchList.map((search) => <Link to={`movies/${search.item.id}`} key={search.item.id} className="list-value"><p>{search.item.title}</p></Link>)}
