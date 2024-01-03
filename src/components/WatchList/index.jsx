@@ -1,9 +1,8 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchWatchListLocal, removeMoviefromList } from "../../redux/slices/MovieSlice";
+import { useDispatch } from "react-redux";
+import { removeMoviefromList } from "../../redux/slices/MovieSlice";
 import { Link } from "react-router-dom";
 import "../../css/watchlist.css"
-import { ArrowForwardIosRounded, CancelOutlined } from "@mui/icons-material";
+import { CancelOutlined } from "@mui/icons-material";
 import { ToastContainer, toast } from "react-toastify";
 
 const WatchList = ({ list, status }) => {
