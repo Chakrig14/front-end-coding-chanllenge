@@ -31,15 +31,6 @@ export default function Home() {
     }, [dispatch])
 
     function pageSelected(selectedPage) {
-        // if (pageVal < 1) {
-        //     setPage(movies.length / 10)
-        // }
-        // else if (pageVal > movies.length / 10) {
-        //     setPage(1);
-        // }
-        // else {
-        //     setPage(pageVal)
-        // }
         setPage((selectedPage.selected) + 1);
     }
 
