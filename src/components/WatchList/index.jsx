@@ -18,8 +18,14 @@ const WatchList = ({ list, status }) => {
     // useEffect(() => {
     //     dispatch(fetchWatchListLocal())
     // }, [dispatch])
+
+    function closeModal(e) {
+        if (e.target.className !== WatchList) {
+            status();
+        }
+    }
     return (
-        <div className="watchlist-container">
+        <div className="watchlist-container" onClick={(e) => closeModal(e)}>
             <div className="bg-slate-900 text-white p-3 watchlist-main">
                 <ToastContainer />
                 <div className="flex justify-between">
