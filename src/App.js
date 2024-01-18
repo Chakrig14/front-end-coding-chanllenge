@@ -3,6 +3,7 @@ import Home from './components/Home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SingleMovie from './components/SingleMovie';
 import WatchLsit from './components/WatchList';
+import OtpValidation from './components/OtpValidation';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "/watchlist",
         element: <WatchLsit />
+      },
+      {
+        path: "/otp",
+        element: <OtpValidation />
       }
     ]
   }
